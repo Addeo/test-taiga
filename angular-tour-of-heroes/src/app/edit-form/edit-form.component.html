@@ -1,0 +1,80 @@
+<div>
+<!--	<tui-svg src="tuiIconDraft"></tui-svg>-->
+	<tui-hosted-dropdown #dropdown [content]="content" [(open)]="dropdownOpen" class="app-hosted-dropdown">
+		<button
+				appearance="flat"
+				icon="tuiIconMoreVertical"
+				tuiIconButton
+				type="button"
+				[pseudoHover]="dropdown.open || null"
+		></button>
+	</tui-hosted-dropdown>
+</div>
+
+<ng-template #content let-activeZone>
+	<tui-data-list tuiDataListDropdownManager [size]="size" [tuiActiveZoneParent]="activeZone">
+		<button tuiOption (click)="redact(modalRedact)">Redact</button>
+		<button tuiOption (click)="delete(modalDelete)">Delete</button>
+	</tui-data-list>
+</ng-template>
+
+<ng-template #modalDelete let-observer>
+    <div>
+		<div class="modal-title-container">
+			<h4 class="tui-text_h4">Are you really want it?</h4>
+		</div>
+        <div>
+            <button
+                appearance="primary"
+                tuiButton
+                size="m"
+                class="tui-space_right-3 tui-space_bottom-3"
+				(click)="allowDelete(observer)"
+            >
+                Yes
+            </button>
+            <button
+                appearance="primary"
+                tuiButton
+                size="m"
+                class="tui-space_right-3 tui-space_bottom-3"
+				(click)="cancelDelete(observer)"
+            >
+                No
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #modalRedact let-observer>
+	<h6 style="text-transform: capitalize; " class="tui-text_h6">Redact</h6>
+	<div>
+		<form class="app-auth-form b-form" [formGroup]="redactForm" (ngSubmit)="onFormRedactSubmit(observer)">
+			<p class="app-auth-form-input">
+				<tui-input formControlName="name" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true">
+					Name
+					<input autocomplete="name" tuiTextfield type="name" />
+				</tui-input>
+			</p>
+			<p class="app-auth-form-input">
+				<tui-input formControlName="surname" tuiTextfieldSize="m" [tuiTextfieldCleaner]="true">
+					Surname
+					<input autocomplete="surname" tuiTextfield type="surname" />
+				</tui-input>
+			</p>
+			<p class="app-auth-form-buttons">
+				<button
+						appearance="primary"
+						tuiButton
+						size="m"
+						[disabled]="!redactForm.valid"
+						class="tui-space_right-3 tui-space_bottom-3"
+				>
+					Save
+				</button>
+			</p>
+		</form>
+	</div>
+</ng-template>
+
+
