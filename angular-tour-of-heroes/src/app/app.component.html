@@ -1,4 +1,38 @@
 <tui-root>
+	<table
+			tuiTable
+			[columns]="columns"
+			class="app-table"
+			size="l"
+	>
+		<thead>
+		<tr tuiThGroup>
+			<th
+					*tuiHead="'actions'"
+					tuiTh
+					[sorter]="null"
+			>
+				<p>Action</p>
+			</th>
+
+		</tr>
+		</thead>
+		<tbody
+				tuiTbody
+		>
+		<tr
+				tuiTr
+		>
+
+			<td
+					*tuiCell="'actions'"
+					tuiTd
+			>
+				<app-edit-form></app-edit-form>
+			</td>
+		</tr>
+		</tbody>
+	</table>
 	<button
 			appearance="secondary"
 			tuiButton

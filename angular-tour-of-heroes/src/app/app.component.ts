@@ -6,18 +6,20 @@ import {EditFormComponent} from "./edit-form/edit-form.component";
 import {CreateModalComponent} from "./create-modal/create-modal.component";
 
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import {TuiTableModule} from "@taiga-ui/addon-table";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-      TuiRootModule, // Has to go after BrowserAnimationsModule
-      RouterOutlet,
-      TuiDialogModule,
-      TuiAlertModule,
-      EditFormComponent,
-      TuiButtonModule
-],
+    imports: [
+        TuiRootModule, // Has to go after BrowserAnimationsModule
+        RouterOutlet,
+        TuiDialogModule,
+        TuiAlertModule,
+        EditFormComponent,
+        TuiButtonModule,
+        TuiTableModule
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
     providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}]
@@ -35,7 +37,7 @@ export class AppComponent {
         new PolymorpheusComponent(CreateModalComponent, this.injector),
     );
 
-
+    readonly columns = ['actions'];
     createOpenModal() {
         this.dialog.subscribe({
             next: (data) => {
